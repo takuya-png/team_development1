@@ -1,5 +1,5 @@
 class AgendasController < ApplicationController
-  # before_action :set_agenda, only: %i[show edit update destroy]
+  before_action :set_agenda, only: %i[destroy]
 
   def index
     @agendas = Agenda.all
@@ -10,6 +10,13 @@ class AgendasController < ApplicationController
     @agenda = Agenda.new
   end
 
+  def destroy
+    binding.irb
+
+    @agenda.destroy
+    redirect_to root_path
+  end
+  
   def create
     @agenda = current_user.agendas.build(title: params[:title])
     @agenda.team = Team.friendly.find(params[:team_id])

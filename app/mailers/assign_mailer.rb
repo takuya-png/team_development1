@@ -7,8 +7,10 @@ class AssignMailer < ApplicationMailer
     mail to: @email.split(","), subject: I18n.t('views.messages.complete_registration')
   end
 
-  def delete_assign_mail(users)
-    @email = users.pluck(:email)
-    mail to: @email, subject: I18n.t('views.messages.delete_agenda')
+  def delete_assign_mail(agenda)
+    @agenda = agenda
+    @emails = @agenda.team.members.pluck(:email)
+    # @emails = users.pluck(:email)
+    mail to: @emails.split(","), subject: I18n.t('views.messages.delete_agenda')
   end
 end

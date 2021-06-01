@@ -19,7 +19,7 @@ class AgendasController < ApplicationController
     path = Rails.application.routes.recognize_path(request.referer)
     if current_user.id == @agenda.user_id || current_user.id == @team.owner_id
       @agenda.destroy
-      AssignMailer.delete_agenda_mail(@users).deliver
+      AssignMailer.delete_assign_mail(@users).deliver
       redirect_to dashboard_path
     else
       redirect_to path
